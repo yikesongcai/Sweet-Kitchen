@@ -1,0 +1,236 @@
+/* pages/chef/chef.wxss */
+
+.chef-page {
+  padding-bottom: calc(var(--spacing-xl) + env(safe-area-inset-bottom));
+  background: #F0F4FF;
+}
+
+.page-header {
+  padding: var(--spacing-lg);
+  background: linear-gradient(135deg, #4A90D2, #6EB5FF);
+  color: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-titles {
+  flex: 1;
+}
+
+.page-title {
+  display: block;
+  font-size: var(--font-size-xxl);
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.page-subtitle {
+  display: block;
+  font-size: var(--font-size-sm);
+  color: rgba(255,255,255,0.8);
+  margin-top: var(--spacing-xs);
+}
+
+.header-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.header-btn {
+  margin: 0;
+  padding: 8rpx 20rpx;
+  font-size: var(--font-size-xs);
+  border-radius: var(--radius-full);
+  background: rgba(255,255,255,0.2) !important;
+  color: #FFFFFF !important;
+  line-height: 1.5;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+.header-btn.secondary {
+  background: transparent !important;
+}
+
+/* 区块 */
+.section {
+  padding: var(--spacing-md) 0;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-lg);
+}
+
+.section-title {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.section-count {
+  font-size: var(--font-size-sm);
+  color: #4A90D2;
+  font-weight: 600;
+}
+
+/* 厨师端点单卡片 */
+.chef-order-card {
+  border-left: 8rpx solid #4A90D2;
+}
+
+.chef-order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.order-badge {
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.order-expect {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* 菜品列表 */
+.chef-order-items {
+  padding: var(--spacing-md) 0;
+  border-top: 2rpx solid var(--color-border);
+  border-bottom: 2rpx solid var(--color-border);
+}
+
+.chef-item {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-xs) 0;
+}
+
+.chef-item-name {
+  font-size: var(--font-size-md);
+  font-weight: 500;
+}
+
+.chef-item-qty {
+  font-size: var(--font-size-md);
+  color: #4A90D2;
+  font-weight: 700;
+}
+
+/* 备注 */
+.chef-order-note {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: #FFF9E0;
+  border-radius: var(--radius-sm);
+}
+
+.note-label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.note-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+}
+
+.chef-order-time {
+  margin-top: var(--spacing-sm);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-light);
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.mood {
+  font-size: 32rpx;
+}
+
+/* 操作按钮 */
+.chef-actions {
+  display: flex;
+  gap: 12rpx;
+  margin-top: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  flex: 1;
+  min-width: 200rpx;
+  border: none;
+  border-radius: var(--radius-full);
+  padding: var(--spacing-md) var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-align: center;
+}
+
+.action-btn::after {
+  border: none;
+}
+
+.action-btn:active {
+  transform: scale(0.95);
+}
+
+.action-btn.preparing {
+  background: #E3F2FD;
+  color: #2196F3;
+}
+
+.action-btn.done {
+  background: #E8F5E9;
+  color: #4CAF50;
+}
+
+.action-btn.served {
+  background: #FCE4EC;
+  color: #E91E63;
+}
+
+.action-btn.reply {
+  background: #F5F5F5;
+  color: var(--color-text-secondary);
+}
+
+/* 已完成列表 */
+.completed-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 0.7;
+}
+
+.completed-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: var(--spacing-sm);
+}
+
+.completed-photo {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: var(--radius-sm);
+  margin-right: var(--spacing-md);
+  flex-shrink: 0;
+}
+
+.completed-time {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-light);
+  white-space: nowrap;
+}

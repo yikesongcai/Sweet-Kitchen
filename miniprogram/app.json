@@ -1,0 +1,46 @@
+{
+    "pages": [
+        "pages/order/order",
+        "pages/message/message",
+        "pages/history/history",
+        "pages/submit/submit",
+        "pages/chef/chef",
+        "pages/menuAdmin/menuAdmin"
+    ],
+    "window": {
+        "navigationBarBackgroundColor": "#FF8FA3",
+        "navigationBarTitleText": "Sweet's 点单",
+        "navigationBarTextStyle": "white",
+        "backgroundColor": "#FFF5F5",
+        "backgroundTextStyle": "light"
+    },
+    "tabBar": {
+        "color": "#AAAAAA",
+        "selectedColor": "#FF6B81",
+        "backgroundColor": "#FFFFFF",
+        "borderStyle": "white",
+        "list": [
+            {
+                "pagePath": "pages/order/order",
+                "text": "点单",
+                "iconPath": "images/tab_order.png",
+                "selectedIconPath": "images/tab_order_active.png"
+            },
+            {
+                "pagePath": "pages/message/message",
+                "text": "消息",
+                "iconPath": "images/tab_message.png",
+                "selectedIconPath": "images/tab_message_active.png"
+            },
+            {
+                "pagePath": "pages/history/history",
+                "text": "历史",
+                "iconPath": "images/tab_history.png",
+                "selectedIconPath": "images/tab_history_active.png"
+            }
+        ]
+    },
+    "style": "v2",
+    "sitemapLocation": "sitemap.json",
+    "cloud": true
+}

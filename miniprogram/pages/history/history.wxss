@@ -1,0 +1,125 @@
+/* pages/history/history.wxss */
+
+.history-page {
+  padding-bottom: calc(var(--spacing-xl) + env(safe-area-inset-bottom));
+}
+
+/* 统计栏 */
+.stats-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: var(--spacing-md);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+  flex: 1;
+}
+
+.stat-num {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.stat-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.stat-divider {
+  width: 2rpx;
+  height: 60rpx;
+  background: var(--color-border);
+}
+
+/* 历史列表 */
+.history-list {
+  padding-top: var(--spacing-xs);
+}
+
+/* 历史卡片 */
+.history-card {
+  margin-bottom: var(--spacing-sm);
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.history-date {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.date-text {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.mood-emoji {
+  font-size: 36rpx;
+}
+
+.history-status {
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+}
+
+/* 菜品列表 */
+.history-items {
+  padding: var(--spacing-md) 0;
+  border-top: 2rpx solid var(--color-border);
+  border-bottom: 2rpx solid var(--color-border);
+}
+
+.history-items-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  line-height: 1.8;
+}
+
+.history-photo {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: var(--radius-sm);
+  margin-top: var(--spacing-sm);
+  display: block;
+}
+
+/* 底部操作栏 */
+.history-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--spacing-md);
+}
+
+.history-time {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.reorder-btn {
+  padding: var(--spacing-xs) var(--spacing-md) !important;
+  font-size: var(--font-size-xs) !important;
+}
+
+/* 加载更多 */
+.load-more {
+  text-align: center;
+  padding: var(--spacing-lg);
+  color: var(--color-text-light);
+  font-size: var(--font-size-sm);
+}

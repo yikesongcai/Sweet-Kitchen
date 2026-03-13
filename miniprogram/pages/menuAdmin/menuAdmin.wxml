@@ -1,0 +1,54 @@
+<!--pages/menuAdmin/menuAdmin.wxml-->
+<view class="menu-admin-page">
+  <view class="page-header">
+    <text class="page-title">🥘 菜单与配图管理</text>
+    <text class="page-subtitle">点击图片区域可以上传 1:1 展示图</text>
+  </view>
+
+  <view class="category-tabs">
+    <scroll-view scroll-x="true" class="tabs-scroll">
+      <view class="tab-list">
+        <view 
+          class="tab-item {{currentCategory === item.category ? 'active' : ''}}"
+          wx:for="{{categories}}" 
+          wx:key="category"
+          bindtap="switchCategory"
+          data-category="{{item.category}}"
+        >
+          {{item.category}}
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="menu-list">
+    <!-- 加载中或空状态 -->
+    <view class="empty-state" wx:if="{{!menuItems.length && !loading}}">
+      <text class="emoji">📭</text>
+      <text class="text">该分类下还没有菜品~</text>
+    </view>
+
+    <!-- 菜品列表 -->
+    <view class="menu-card card" wx:for="{{menuItems}}" wx:key="_id">
+      <view class="menu-photo" bindtap="uploadPhoto" data-id="{{item._id}}">
+        <image wx:if="{{item.image}}" src="{{item.image}}" mode="aspectFill" class="photo-img"></image>
+        <view class="photo-placeholder" wx:else>
+          <text class="placeholder-icon">📸</text>
+          <text class="placeholder-text">上传图片</text>
+        </view>
+      </view>
+
+      <view class="menu-info">
+        <view class="menu-name">
+          <text class="emoji">{{item.emoji}}</text>
+          <text class="name-text">{{item.name}}</text>
+        </view>
+        <view class="menu-actions">
+          <switch checked="{{item.available}}" color="#4CAF50" bindchange="toggleAvailable" data-id="{{item._id}}" class="action-switch"/>
+          <text class="status-text {{item.available ? 'on' : 'off'}}">{{item.available ? '上架中' : '已下架'}}</text>
+          <button class="delete-btn" bindtap="deleteItem" data-id="{{item._id}}" data-name="{{item.name}}">删除</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,82 @@
+<!-- 
+  TabBar 图标生成工具
+  在浏览器中打开此文件，右键保存生成的图标到 miniprogram/images/ 文件夹
+  图标尺寸：81x81px（微信小程序推荐）
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>生成 TabBar 图标</title>
+  <style>
+    body { font-family: sans-serif; padding: 40px; background: #f5f5f5; }
+    .icon-group { display: flex; gap: 40px; margin: 20px 0; align-items: flex-end; }
+    .icon-item { text-align: center; }
+    .icon-item p { margin: 8px 0; font-size: 14px; color: #666; }
+    canvas { border: 1px solid #ddd; background: white; border-radius: 8px; }
+    h2 { color: #333; }
+    .tip { color: #999; font-size: 13px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>🎨 Sweet's 点单 - TabBar 图标生成器</h1>
+  <p>右键点击每个图标 → "图片另存为" → 保存到 <code>miniprogram/images/</code> 文件夹</p>
+  
+  <h2>点单 Tab</h2>
+  <div class="icon-group">
+    <div class="icon-item">
+      <canvas id="order" width="81" height="81"></canvas>
+      <p>tab_order.png</p>
+    </div>
+    <div class="icon-item">
+      <canvas id="order_active" width="81" height="81"></canvas>
+      <p>tab_order_active.png</p>
+    </div>
+  </div>
+
+  <h2>消息 Tab</h2>
+  <div class="icon-group">
+    <div class="icon-item">
+      <canvas id="message" width="81" height="81"></canvas>
+      <p>tab_message.png</p>
+    </div>
+    <div class="icon-item">
+      <canvas id="message_active" width="81" height="81"></canvas>
+      <p>tab_message_active.png</p>
+    </div>
+  </div>
+
+  <h2>历史 Tab</h2>
+  <div class="icon-group">
+    <div class="icon-item">
+      <canvas id="history" width="81" height="81"></canvas>
+      <p>tab_history.png</p>
+    </div>
+    <div class="icon-item">
+      <canvas id="history_active" width="81" height="81"></canvas>
+      <p>tab_history_active.png</p>
+    </div>
+  </div>
+
+  <p class="tip">💡 提示：也可以使用 iconfont 等网站下载图标替代这些简单图标</p>
+
+  <script>
+    function drawIcon(canvasId, emoji, color) {
+      const canvas = document.getElementById(canvasId);
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, 81, 81);
+      ctx.font = '48px serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(emoji, 40, 42);
+    }
+
+    // 使用 emoji 作为简单图标
+    drawIcon('order', '🍽️', '#AAAAAA');
+    drawIcon('order_active', '🍽️', '#FF6B81');
+    drawIcon('message', '💌', '#AAAAAA');
+    drawIcon('message_active', '💌', '#FF6B81');
+    drawIcon('history', '📋', '#AAAAAA');
+    drawIcon('history_active', '📋', '#FF6B81');
+  </script>
+</body>
+</html>

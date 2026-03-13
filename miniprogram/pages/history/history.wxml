@@ -1,0 +1,59 @@
+<!--pages/history/history.wxml-->
+<view class="history-page">
+  <!-- 趣味统计 -->
+  <view class="stats-bar card">
+    <view class="stat-item">
+      <text class="stat-num">{{stats.totalOrders}}</text>
+      <text class="stat-label">📊 累计点单</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-num">{{stats.favoriteFood || '—'}}</text>
+      <text class="stat-label">❤️ 最爱</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-num">{{stats.thisMonth}}</text>
+      <text class="stat-label">🏆 本月</text>
+    </view>
+  </view>
+
+  <!-- 历史列表 -->
+  <view class="history-list">
+    <view class="empty-state" wx:if="{{!orders.length && !loading}}">
+      <text class="emoji">📋</text>
+      <text class="text">还没有历史点单~</text>
+    </view>
+
+    <view class="history-card card" wx:for="{{orders}}" wx:key="_id">
+      <view class="history-header">
+        <view class="history-date">
+          <text class="date-text">{{item.dateText}}</text>
+          <text class="mood-emoji" wx:if="{{item.mood}}">{{item.mood}}</text>
+        </view>
+        <view class="history-status {{item.statusClass}}">
+          {{item.statusEmoji}} {{item.statusText}}
+        </view>
+      </view>
+
+      <view class="history-items">
+        <text class="history-items-text">{{item.itemsText}}</text>
+        <image class="history-photo" wx:if="{{item.photo}}" src="{{item.photo}}" mode="aspectFill" catchtap="previewImage" data-url="{{item.photo}}"></image>
+      </view>
+
+      <view class="history-footer">
+        <text class="history-time">⏰ {{item.expectTime}}</text>
+        <view class="history-actions">
+          <button class="btn-secondary reorder-btn" bindtap="reorder" data-items="{{item.rawItems}}">
+            再来一单
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="load-more" wx:if="{{hasMore}}" bindtap="loadMore">
+    <text>加载更多...</text>
+  </view>
+</view>

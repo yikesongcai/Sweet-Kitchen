@@ -1,0 +1,105 @@
+<!--pages/chef/chef.wxml-->
+<view class="chef-page">
+  <view class="page-header">
+    <view class="header-titles">
+      <text class="page-title">👨‍🍳 厨师管理台</text>
+      <text class="page-subtitle">管理点单和菜单</text>
+    </view>
+    <view class="header-actions">
+      <button class="header-btn" bindtap="navToMenuAdmin">🥘 管理菜单</button>
+      <button class="header-btn secondary" bindtap="importMenu">🌩️ 一键导菜单</button>
+    </view>
+  </view>
+
+  <!-- 待处理点单 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">📋 待处理点单</text>
+      <text class="section-count" wx:if="{{pendingOrders.length}}">{{pendingOrders.length}} 单</text>
+    </view>
+
+    <view class="empty-state" wx:if="{{!pendingOrders.length && !loading}}">
+      <text class="emoji">😌</text>
+      <text class="text">暂时没有新点单~</text>
+    </view>
+
+    <view class="chef-order-card card" wx:for="{{pendingOrders}}" wx:key="_id">
+      <view class="chef-order-header">
+        <view class="order-badge {{item.statusClass}}">
+          {{item.statusEmoji}} {{item.statusText}}
+        </view>
+        <text class="order-expect">⏰ {{item.expectTime}}</text>
+      </view>
+
+      <view class="chef-order-items">
+        <view class="chef-item" wx:for="{{item.items}}" wx:for-item="food" wx:key="name">
+          <text class="chef-item-name">{{food.name}}</text>
+          <text class="chef-item-qty">×{{food.quantity}}</text>
+        </view>
+      </view>
+
+      <view class="chef-order-note" wx:if="{{item.note}}">
+        <text class="note-label">📝 备注：</text>
+        <text class="note-text">{{item.note}}</text>
+      </view>
+
+      <view class="chef-order-time">
+        {{item.timeText}}
+        <text class="mood" wx:if="{{item.mood}}">{{item.mood}}</text>
+      </view>
+
+      <!-- 操作按钮组 -->
+      <view class="chef-actions">
+        <button
+          class="action-btn preparing"
+          wx:if="{{item.status === 'submitted'}}"
+          bindtap="updateStatus"
+          data-id="{{item._id}}"
+          data-status="preparing"
+          data-text="准备中"
+        >
+          👨‍🍳 开始准备
+        </button>
+        <button
+          class="action-btn done"
+          wx:if="{{item.status === 'preparing'}}"
+          bindtap="updateStatus"
+          data-id="{{item._id}}"
+          data-status="done"
+          data-text="已完成"
+        >
+          ✅ 做好了
+        </button>
+        <button
+          class="action-btn served"
+          wx:if="{{item.status === 'done'}}"
+          bindtap="serveWithPhoto"
+          data-id="{{item._id}}"
+        >
+          📸 打卡！开饭！
+        </button>
+        <button
+          class="action-btn reply"
+          bindtap="replyOrder"
+          data-id="{{item._id}}"
+        >
+          💬 回复
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 已完成点单 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">✅ 已完成</text>
+    </view>
+    <view class="completed-list">
+      <view class="completed-item card" wx:for="{{completedOrders}}" wx:key="_id">
+        <text class="completed-text">{{item.itemsText}}</text>
+        <image class="completed-photo" wx:if="{{item.photo}}" src="{{item.photo}}" mode="aspectFill" catchtap="previewImage" data-url="{{item.photo}}"></image>
+        <text class="completed-time">{{item.timeText}}</text>
+      </view>
+    </view>
+  </view>
+</view>

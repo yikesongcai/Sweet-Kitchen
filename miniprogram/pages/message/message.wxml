@@ -1,0 +1,55 @@
+<!--pages/message/message.wxml-->
+<view class="message-page">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <text class="page-title">消息通知 💌</text>
+  </view>
+
+  <!-- 消息列表 -->
+  <scroll-view class="message-list" scroll-y="true" refresher-enabled="{{true}}" bindrefresherrefresh="onRefresh" refresher-triggered="{{refreshing}}" show-scrollbar="{{false}}" enhanced="{{true}}" scroll-into-view="{{scrollToId}}" scroll-with-animation="{{false}}">
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{!orderMessages.length && !loading}}">
+      <text class="emoji">📭</text>
+      <text class="text">还没有消息哦~</text>
+      <text class="text">快去点单吧！</text>
+    </view>
+
+    <!-- 消息卡片 -->
+    <view class="message-group" wx:for="{{orderMessages}}" wx:key="orderId">
+      <!-- 点单卡片头部 -->
+      <view class="order-header card">
+        <view class="order-header-top">
+          <view class="order-status-tag {{item.statusClass}}">
+            <text>{{item.statusEmoji}} {{item.statusText}}</text>
+          </view>
+          <text class="order-time">{{item.timeText}}</text>
+        </view>
+        <view class="order-items-preview">
+          <text class="preview-text">{{item.itemsPreview}}</text>
+          <text class="preview-time" wx:if="{{item.expectTime}}">⏰ {{item.expectTime}}</text>
+        </view>
+      </view>
+
+      <!-- 消息气泡 -->
+      <view class="bubble-list">
+        <view
+          class="bubble-wrap {{msg.sender === 'sweet' ? 'right' : 'left'}}"
+          wx:for="{{item.messages}}"
+          wx:for-item="msg"
+          wx:key="_id"
+        >
+          <view class="bubble {{msg.sender === 'sweet' ? 'bubble-pink' : 'bubble-white'}}" wx:if="{{msg.type === 'image'}}">
+            <image class="bubble-image" src="{{msg.content}}" mode="aspectFill" bindtap="previewImage" data-url="{{msg.content}}"></image>
+            <text class="bubble-time">{{msg.timeText}}</text>
+          </view>
+          
+          <view class="bubble {{msg.sender === 'sweet' ? 'bubble-pink' : 'bubble-white'}}" wx:else>
+            <text class="bubble-text">{{msg.content}}</text>
+            <text class="bubble-time">{{msg.timeText}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view id="scroll-bottom" style="height: 1px; width: 100%;"></view>
+  </scroll-view>
+</view>

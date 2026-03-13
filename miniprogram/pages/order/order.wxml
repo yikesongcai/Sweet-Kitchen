@@ -1,0 +1,121 @@
+<!--pages/order/order.wxml-->
+<view class="order-page">
+  <!-- 顶部欢迎语 -->
+  <view class="welcome-bar">
+    <text class="welcome-text" bindlongpress="goChef">今天想吃什么呀？💕</text>
+    <view class="random-btn" bindtap="randomPick">
+      <text class="random-icon">🎲</text>
+      <text class="random-text">随机</text>
+    </view>
+  </view>
+
+  <!-- 分类标签栏 -->
+  <scroll-view class="category-scroll" scroll-x="true" enhanced="true" show-scrollbar="{{false}}">
+    <view class="category-list">
+      <view
+        class="category-item {{currentCategory === index ? 'active' : ''}}"
+        wx:for="{{menuData}}"
+        wx:key="category"
+        bindtap="switchCategory"
+        data-index="{{index}}"
+      >
+        <text class="category-emoji">{{item.emoji}}</text>
+        <text class="category-name">{{item.category}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 菜品列表 -->
+  <view class="food-section" wx:if="{{menuData.length > 0}}">
+    <view class="section-title">
+      <text class="title-emoji">{{menuData[currentCategory].emoji}}</text>
+      <text class="title-text">{{menuData[currentCategory].category}}</text>
+    </view>
+    <view class="food-grid">
+      <view
+        class="food-card animate-fade-in"
+        wx:for="{{menuData[currentCategory].items}}"
+        wx:key="_id"
+        style="animation-delay: {{index * 0.06}}s"
+      >
+        <view class="food-image-container">
+          <image class="food-image" wx:if="{{item.image}}" src="{{item.image}}" mode="aspectFill"></image>
+          <view class="food-image-placeholder" wx:else>
+            <text class="placeholder-emoji">{{item.emoji}}</text>
+          </view>
+        </view>
+        <view class="food-info">
+          <text class="food-name">{{item.name}}</text>
+        </view>
+        <view class="food-action">
+          <view
+            class="add-btn {{isSelected(item.name) ? 'added' : ''}}"
+            bindtap="toggleItem"
+            data-name="{{item.name}}"
+            data-category="{{menuData[currentCategory].category}}"
+          >
+            <text wx:if="{{!isSelected(item.name)}}">+</text>
+            <text wx:else class="check-mark">✓</text>
+          </view>
+          <view class="quantity-control" wx:if="{{isSelected(item.name)}}">
+            <view class="qty-btn minus" catchtap="decreaseQty" data-name="{{item.name}}">−</view>
+            <text class="qty-num">{{getItemQty(item.name)}}</text>
+            <view class="qty-btn plus" catchtap="increaseQty" data-name="{{item.name}}">+</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 随机推荐弹窗 -->
+  <view class="random-modal" wx:if="{{showRandom}}" bindtap="closeRandom">
+    <view class="random-content" catchtap="">
+      <text class="random-title">🎲 今天就吃这个！</text>
+      <view class="random-items">
+        <view class="random-item" wx:for="{{randomItems}}" wx:key="_id">
+          <text>{{item.name}}</text>
+        </view>
+      </view>
+      <view class="random-actions">
+        <button class="btn-secondary" catchtap="randomPick">换一批</button>
+        <button class="btn-primary" catchtap="addRandomItems">就这些！</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部已选栏 -->
+  <view class="cart-bar {{selectedItems.length > 0 ? 'show' : ''}}" wx:if="{{selectedItems.length > 0}}">
+    <view class="cart-info" bindtap="toggleCartDetail">
+      <view class="cart-badge">{{totalCount}}</view>
+      <text class="cart-text">已选 {{selectedItems.length}} 道菜</text>
+      <text class="cart-arrow">{{showCartDetail ? '▼' : '▲'}}</text>
+    </view>
+    <button class="cart-submit-btn" bindtap="goSubmit">
+      去下单 💕
+    </button>
+  </view>
+
+  <!-- 已选详情展开 -->
+  <view class="cart-detail {{showCartDetail ? 'show' : ''}}" wx:if="{{showCartDetail}}">
+    <view class="cart-detail-mask" bindtap="toggleCartDetail"></view>
+    <view class="cart-detail-content">
+      <view class="cart-detail-header">
+        <text class="cart-detail-title">已选菜品</text>
+        <text class="cart-clear" bindtap="clearAll">清空</text>
+      </view>
+      <scroll-view class="cart-detail-list" scroll-y="true">
+        <view class="cart-detail-item" wx:for="{{selectedItems}}" wx:key="name">
+          <text class="item-name">{{item.name}}</text>
+          <view class="item-controls">
+            <view class="qty-btn minus" bindtap="decreaseQty" data-name="{{item.name}}">−</view>
+            <text class="qty-num">{{item.quantity}}</text>
+            <view class="qty-btn plus" bindtap="increaseQty" data-name="{{item.name}}">+</view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <!-- 底部占位 -->
+  <view class="bottom-placeholder" wx:if="{{selectedItems.length > 0}}"></view>
+</view>
