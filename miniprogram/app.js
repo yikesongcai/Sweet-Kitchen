@@ -74,10 +74,10 @@ App({
   checkUserRole: function (openid) {
     const that = this
 
-    // 直接在代码层面硬性绑定你们两人的 openid，省去了你去云数据库手动配置的麻烦！
-    if (openid === 'ox8Dg5DV4VW7LiZFGJtH3bdzuvEI') {
+    //TODO: 直接在代码层面硬性绑定你们两人的 openid，省去了你去云数据库手动配置的麻烦！
+    if (openid === '???') {
       that.globalData.userRole = 'sweet'
-    } else if (openid === 'ox8Dg5Pw-phVwp2HlnA9r_Oi13d8') {
+    } else if (openid === '???') {
       that.globalData.userRole = 'chef'
     }
 
